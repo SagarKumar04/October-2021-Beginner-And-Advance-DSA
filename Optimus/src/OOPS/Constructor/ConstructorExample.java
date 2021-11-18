@@ -1,4 +1,4 @@
-package OOPS.ClassInitializers.Constructor;
+package OOPS.Constructor;
 
 public class ConstructorExample {
     int a, b;
