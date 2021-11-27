@@ -48,6 +48,10 @@ public class SinglyLinkedList {
         //3. Set 'next' to NULL
         Node newNode = new Node(newNodeData);
 
+        if(head == null) {
+            currentLastNode = newNode;
+        }
+
         //4. Link new node to the current first node
         newNode.next = head;
 
@@ -125,13 +129,38 @@ public class SinglyLinkedList {
         temp.next = null;
     }
 
-    public void deleteOtherNode(int position) {
+    public void deleteOtherNode(int position, int length) {
+        Node temp = head;
+        int currentPosition = 1;
 
+        while(currentPosition != (position - 1)) {
+            temp = temp.next;
+            currentPosition++;
+        }
+
+        Node delete = temp.next;
+        temp.next = delete.next;
+        delete.next = null;
+
+        if(position == length) {
+            currentLastNode = temp;
+        }
     }
 
-    public void deleteLastNode() {
+    /*
+    public void deleteLastNode(int length) {
+        Node temp = head;
+        int currentPosition = 1;
 
+        while(currentPosition != (length - 1)) {
+            temp = temp.next;
+            currentPosition++;
+        }
+
+        temp.next = null;
+        currentLastNode = temp;
     }
+     */
 
     public void delete(int position) {
         int length = findLength();
@@ -139,29 +168,57 @@ public class SinglyLinkedList {
         if(position == 1) {
             deleteFirstNode();
         }
+        /*
         else if(position == length) {
-            deleteLastNode();
+            deleteLastNode(length);
         }
+         */
         else {
-            deleteOtherNode(position);
+            deleteOtherNode(position, length);
         }
     }
 
     public static void main(String[] args) {
+        int length;
+
         SinglyLinkedList singlyLinkedList = new SinglyLinkedList();
 
         singlyLinkedList.push(15);
         singlyLinkedList.append(40);
+
+        length = singlyLinkedList.findLength();
+        singlyLinkedList.delete(length - 1);
+
+        singlyLinkedList.appendOptimised(1001);
+
         singlyLinkedList.append(10);
         singlyLinkedList.insertAtPosition(3, 11);
         singlyLinkedList.push(25);
         singlyLinkedList.appendOptimised(100);
+
+        length = singlyLinkedList.findLength();
+        singlyLinkedList.delete(length);
+
+        singlyLinkedList.appendOptimised(101);
+
         singlyLinkedList.push(35);
         singlyLinkedList.insertAtPosition(6, 22);
         singlyLinkedList.append(30);
         singlyLinkedList.appendOptimised(300);
+
+        length = singlyLinkedList.findLength();
+        singlyLinkedList.delete(length - 4);
+
+        singlyLinkedList.appendOptimised(101);
+
         singlyLinkedList.appendOptimised(200);
         singlyLinkedList.push(45);
+
+        length = singlyLinkedList.findLength();
+        singlyLinkedList.delete(length);
+
+        singlyLinkedList.appendOptimised(101);
+
         singlyLinkedList.insertAtPosition(10, 33);
 
         singlyLinkedList.traverse();
