@@ -1,5 +1,7 @@
 package LinkedList.Circular;
 
+import LinkedList.Singly.SinglyLinkedList;
+
 public class CircularLinkedList {
     Node head;
     Node currentLastNode;
@@ -46,6 +48,57 @@ public class CircularLinkedList {
         }
     }
 
+    public void deleteFirst() {
+        Node temp = head;
+        head = head.next;
+        temp.next = null;
+        currentLastNode.next = head;
+    }
+
+    public void deleteAtOtherPosition(int position) {
+        Node temp = head;
+        int currentPosition = 1;
+
+        while(currentPosition != (position - 1)) {
+            temp = temp.next;
+            currentPosition = currentPosition + 1;
+        }
+
+        Node delete = temp.next;
+
+        temp.next = delete.next;
+        delete.next = null;
+
+        if(temp.next == head) {
+            currentLastNode = temp;
+        }
+    }
+
+    public void insertAtPosition(int position, int newNodeData) {
+        //1. Create a node
+        //2. Put data in the node
+        //3. Set 'next' to NULL
+        Node newNode = new Node(newNodeData);
+
+        //4. Make 'temp' point to the first node
+        Node temp = head;
+
+        //5. Set current position as 1
+        int currentPosition = 1;
+
+        //6. Traverse through the linked list and reach node at (position - 1)
+        while(currentPosition != (position - 1)) {
+            temp = temp.next;
+            currentPosition = currentPosition + 1;
+        }
+
+        //7. Make new node point to the next node after 'temp'
+        newNode.next = temp.next;
+
+        //8. Make 'temp' node point to the new node
+        temp.next = newNode;
+    }
+
     public void append(int newNodeData) {
         Node newNode = new Node(newNodeData);
 
@@ -66,10 +119,21 @@ public class CircularLinkedList {
         circularLinkedList.push(7);
         circularLinkedList.append(11);
         circularLinkedList.push(1);
+        circularLinkedList.insertAtPosition(3, 100);
         circularLinkedList.append(33);
         circularLinkedList.push(3);
+        circularLinkedList.insertAtPosition(2, 200);
         circularLinkedList.push(8);
         circularLinkedList.append(22);
+
+        circularLinkedList.deleteFirst();
+        circularLinkedList.deleteFirst();
+        circularLinkedList.deleteAtOtherPosition(3);
+        circularLinkedList.deleteAtOtherPosition(7);
+        circularLinkedList.deleteAtOtherPosition(6);
+
+        circularLinkedList.append(1000);
+        circularLinkedList.append(2000);
 
         circularLinkedList.traversal();
     }
