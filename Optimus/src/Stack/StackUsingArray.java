@@ -1,5 +1,7 @@
 package Stack;
 
+import java.util.Arrays;
+
 public class StackUsingArray {
     private int top;
     private int stackArray[];
@@ -12,6 +14,8 @@ public class StackUsingArray {
     }
 
     private void push(int data) {
+        Arrays.sort(stackArray);
+
         if(top == maxSize - 1) {
             System.out.println("Overflow");
         }
