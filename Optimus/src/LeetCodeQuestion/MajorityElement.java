@@ -1,4 +1,4 @@
-package LinkedListLeetCodeQuestion;
+package LeetCodeQuestion;
 
 import java.util.HashMap;
 import java.util.Map;

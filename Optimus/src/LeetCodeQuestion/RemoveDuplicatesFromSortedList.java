@@ -1,4 +1,4 @@
-package LinkedListLeetCodeQuestion;
+package LeetCodeQuestion;
 
 /*
 Link: https://leetcode.com/problems/remove-duplicates-from-sorted-list/
