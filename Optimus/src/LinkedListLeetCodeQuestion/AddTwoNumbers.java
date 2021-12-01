@@ -23,4 +23,63 @@ public class AddTwoNumbers {
             this.next = next;
         }
     }
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode temp1 = l1, temp2 = l2;
+        ListNode resultHead = null, currentLastNode = null;
+
+        int carry = 0;
+        while(temp1 != null && temp2 != null) {
+            int sum = temp1.val + temp2.val + carry;
+
+            int digit = sum % 10;
+            carry = sum / 10;
+
+            ListNode newNode = new ListNode(digit);
+
+            if(resultHead != null) {
+                currentLastNode.next = newNode;
+                currentLastNode = newNode;
+            }
+            else {
+                resultHead = newNode;
+                currentLastNode = newNode;
+            }
+
+            temp1 = temp1.next;
+            temp2 = temp2.next;
+        }
+
+        while(temp1 != null) {
+            int sum = temp1.val + carry;
+            int digit = sum % 10;
+            carry = sum / 10;
+
+            ListNode newNode = new ListNode(digit);
+            currentLastNode.next = newNode;
+            currentLastNode = newNode;
+
+            temp1 = temp1.next;
+        }
+
+        while(temp2 != null) {
+            int sum = temp2.val + carry;
+            int digit = sum % 10;
+            carry = sum / 10;
+
+            ListNode newNode = new ListNode(digit);
+            currentLastNode.next = newNode;
+            currentLastNode = newNode;
+
+            temp2 = temp2.next;
+        }
+
+        if(carry > 0) {
+            ListNode newNode = new ListNode(carry);
+            currentLastNode.next = newNode;
+            currentLastNode = newNode;
+        }
+
+        return resultHead;
+    }
 }
