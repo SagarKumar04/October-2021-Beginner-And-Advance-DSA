@@ -52,11 +52,24 @@ public class TreeTraversal2 {
         return height;
     }
 
+    private void printCurrentLevel(Node root, int level) {
+        if(root != null) {
+            if(level == 0) {
+                System.out.print(root.data + " ");
+            }
+            else {
+                printCurrentLevel(root.left, level - 1);
+                printCurrentLevel(root.right, level - 1);
+            }
+        }
+    }
+
     private void printLevelOrder() {
-        int heightOfTree = calculateHeight(root);
+        int heightOfTree = calculateHeight(root) - 1;
 
         for(int i = 0; i <= heightOfTree; i++) {
             printCurrentLevel(root, i);
+            System.out.println();
         }
     }
 
