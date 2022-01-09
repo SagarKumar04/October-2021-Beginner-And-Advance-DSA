@@ -1,8 +1,6 @@
 package Tree.Construction;
 
 public class InorderAndPostorder {
-    Node root;
-
     class Node {
         int data;
         Node left, right;
@@ -50,12 +48,30 @@ public class InorderAndPostorder {
         int inorderIndex = search(inorder, inorderStartIndex,
                 inorderEndIndex, rootNode.data);
 
-        /*
         rootNode.left = buildTree(inorder, postorder,
                 inorderStartIndex, inorderIndex - 1,
-                postorderStartIndex, );
-        rootNode.right = buildTree();
+                postorderStartIndex, postorderStartIndex - inorderStartIndex + inorderIndex - 1);
+        /*
+        Explanation of postorderEndIndex calculation for left subtree:
+        size(leftSubtree) = leftSize = inorderIndex - inorderStartIndex
+
+        => postorderEndIndex = postorderStartIndex + leftSize - 1
+        => postorderEndIndex = postorderStartIndex + (inorderIndex - inorderStartIndex) - 1
+        => postorderEndIndex = postorderStartIndex - inorderStartIndex + inorderIndex - 1
          */
+
+        rootNode.right = buildTree(inorder, postorder,
+                inorderIndex + 1, inorderEndIndex,
+                postorderEndIndex - inorderEndIndex + inorderIndex, postorderEndIndex - 1);
+        /*
+        Explanation of postorderStartIndex calculation for right subtree:
+        size(rightSubtree) = rightSize = inorderEndIndex - inorderIndex
+
+        => postorderStartIndex = postorderEndIndex - rightSize
+        => postorderStartIndex = postorderEndIndex - (inorderEndIndex - inorderIndex)
+        => postorderStartIndex = postorderEndIndex - inorderEndIndex + inorderIndex
+         */
+
         return rootNode;
     }
     public static void main(String[] args) {
