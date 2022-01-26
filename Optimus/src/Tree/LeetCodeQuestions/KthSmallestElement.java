@@ -1,4 +1,4 @@
-package Tree;
+package Tree.LeetCodeQuestions;
 
 /*
 Link: https://leetcode.com/problems/kth-smallest-element-in-a-bst/
